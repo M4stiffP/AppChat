@@ -5,6 +5,7 @@ import { useUserStore } from '../../../lib/userStore'
 import { doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { db } from '../../../lib/firebase'
 import { useChatStore } from '../../../lib/chatStore'
+import { formatMessageForList } from '../../../lib/messageUtils.jsx'
 
 const ChatList = () => {
     const [chats, setChats] = useState([])
@@ -109,7 +110,7 @@ const ChatList = () => {
                                 ? "User"
                                 : chat.user.username}
                         </span>
-                        <p>{chat.lastMessage}</p>
+                        <p>{formatMessageForList(chat.lastMessage, 35)}</p>
                     </div>
                 </div>
             ))}

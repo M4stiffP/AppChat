@@ -91,14 +91,26 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            flex: 1;
+            min-width: 0; /* ป้องกันการยืด */
 
             span{
                 font-weight: 500;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             p{
                 font-size: 14px;
                 font-weight: 300;
+                color: #a5a5a5;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+                word-break: break-word;
+                overflow-wrap: break-word;
             }
         }
     }
