@@ -24,6 +24,9 @@ body{
   color: var(--text-color);
   margin: 0;
   padding: 0;
+  /* ป้องกันรูปพื้นหลังแตก */
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 #root {
@@ -43,4 +46,44 @@ body{
   border: 1px solid var(--border-color);
   display: flex;
   overflow: hidden;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Mobile phones (320px - 767px) */
+@media (max-width: 767px) {
+  body {
+    background-attachment: scroll; /* Fix for mobile */
+  }
+  
+  #root {
+    padding: 10px;
+  }
+  
+  .container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+    max-width: none;
+    flex-direction: column;
+  }
+}
+
+/* Tablet portrait (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    width: 95vw;
+    height: 95vh;
+    border-radius: 8px;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .container {
+    width: 90vw;
+    height: 90vh;
+    border-radius: 12px;
+  }
 } 

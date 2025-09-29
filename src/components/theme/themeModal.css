@@ -191,3 +191,115 @@
 .theme-modal::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
 }
+
+/* ========== MOBILE RESPONSIVE ========== */
+
+/* Mobile phones (max-width: 767px) */
+@media (max-width: 767px) {
+  .theme-modal-overlay {
+    padding: 0;
+    align-items: flex-start;
+  }
+  
+  .theme-modal {
+    width: 100%;
+    max-width: none;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+    margin: 0;
+  }
+  
+  .theme-header {
+    padding: 16px 20px;
+    border-radius: 0;
+  }
+  
+  .theme-header h2 {
+    font-size: 18px;
+  }
+  
+  .close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+  
+  .theme-content {
+    padding: 20px;
+  }
+  
+  .theme-section {
+    margin-bottom: 24px;
+  }
+  
+  .theme-section h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .theme-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .theme-card {
+    padding: 10px;
+  }
+  
+  .theme-preview {
+    height: 50px;
+  }
+  
+  .theme-card span {
+    font-size: 11px;
+  }
+  
+  .upload-btn {
+    padding: 14px 20px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .upload-hint {
+    font-size: 11px;
+    text-align: center;
+  }
+  
+  .reset-btn {
+    padding: 14px 20px;
+    font-size: 16px;
+  }
+}
+
+/* Tablet portrait (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .theme-modal {
+    width: 95%;
+    max-width: 500px;
+  }
+  
+  .theme-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Small mobile phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .theme-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .theme-card {
+    padding: 8px;
+  }
+  
+  .theme-preview {
+    height: 40px;
+  }
+  
+  .theme-card span {
+    font-size: 10px;
+  }
+}

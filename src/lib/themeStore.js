@@ -68,11 +68,21 @@ export const useThemeStore = create((set, get) => ({
   
   applyTheme: (theme) => {
     const root = document.documentElement
+    const body = document.body
+    
+    // อัพเดท CSS variables
     root.style.setProperty('--bg-gradient', theme.background)
     root.style.setProperty('--primary-color', theme.primaryColor)
     root.style.setProperty('--secondary-color', theme.secondaryColor)
     root.style.setProperty('--text-color', theme.textColor)
     root.style.setProperty('--border-color', theme.borderColor)
+    
+    // อัพเดทพื้นหลังโดยตรงเพื่อป้องกันการแตก
+    body.style.background = theme.background
+    body.style.backgroundSize = 'cover'
+    body.style.backgroundPosition = 'center'
+    body.style.backgroundRepeat = 'no-repeat'
+    body.style.backgroundAttachment = 'fixed'
   },
   
   initializeTheme: () => {

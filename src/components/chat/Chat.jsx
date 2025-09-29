@@ -2,6 +2,7 @@ import "./chat.css"
 import EmojiPicker from "emoji-picker-react"
 import { useState, useRef, useEffect } from "react"
 import ImageModal from "./ImageModal"
+import { formatMessageWithLinks } from "../../lib/messageUtils.jsx"
 import {
   arrayUnion,
   doc,
@@ -30,7 +31,7 @@ const Chat = () => {
     })
 
     const { currentUser } = useUserStore()
-    const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } =
+    const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, resetChat } =
         useChatStore()
 
     const endRef = useRef(null)
@@ -41,13 +42,32 @@ const Chat = () => {
 
     useEffect(() => {
         const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
-            setChat(res.data())
+            const chatData = res.data()
+            setChat(chatData)
+            
+            // อัพเดท read status สำหรับข้อความที่ยังไม่ได้อ่าน
+            if (chatData?.messages) {
+                const unreadMessages = chatData.messages.filter(
+                    msg => msg.senderId !== currentUser?.id && !msg.isSeen
+                )
+                
+                if (unreadMessages.length > 0) {
+                    // อัพเดท messages ให้เป็น read
+                    const updatedMessages = chatData.messages.map(msg => 
+                        msg.senderId !== currentUser?.id ? { ...msg, isSeen: true } : msg
+                    )
+                    
+                    updateDoc(doc(db, "chats", chatId), {
+                        messages: updatedMessages
+                    }).catch(err => console.log('Failed to update read status:', err))
+                }
+            }
         })
 
         return () => {
             unSub()
         }
-    }, [chatId])
+    }, [chatId, currentUser?.id])
 
     const handleEmojiClick = (e) => {
         setText((prev) => prev + e.emoji)
@@ -91,11 +111,14 @@ const Chat = () => {
                 console.log('✅ Upload successful, URL:', imgUrl ? imgUrl.substring(0, 100) + '...' : 'null');
             }
 
+            // สร้างข้อความ - ถ้ามีรูปแต่ไม่มีข้อความ ให้ใส่ข้อความว่าง
+            const messageText = text || (imgUrl ? "" : "");
+
             console.log('💾 Saving message to Firestore...');
             await updateDoc(doc(db, "chats", chatId), {
                 messages: arrayUnion({
                     senderId: currentUser.id,
-                    text,
+                    text: messageText,
                     createdAt: new Date(),
                     ...(imgUrl && { img: imgUrl }),
                 }),
@@ -115,7 +138,7 @@ const Chat = () => {
                         (c) => c.chatId === chatId
                     )
 
-                    userChatsData.chats[chatIndex].lastMessage = text
+                    userChatsData.chats[chatIndex].lastMessage = text || (imgUrl ? "📷 Image" : "")
                     userChatsData.chats[chatIndex].isSeen =
                         id === currentUser.id ? true : false
                     userChatsData.chats[chatIndex].updatedAt = Date.now()
@@ -167,6 +190,15 @@ const Chat = () => {
                         onClick={() => alert('User info displayed on the right!')}
                         style={{ cursor: 'pointer' }}
                     />
+                    <img 
+                        src="/minus.png" 
+                        alt="Close Chat" 
+                        onClick={() => {
+                            resetChat()
+                        }}
+                        style={{ cursor: 'pointer', width: '16px', height: '16px' }}
+                        title="Close Chat"
+                    />
                 </div>
             </div>
             <div className="center">
@@ -186,8 +218,17 @@ const Chat = () => {
                                     style={{ cursor: 'pointer' }}
                                 />
                             )}
-                            <p>{message.text}</p>
-                            <span>{format(message.createdAt.toDate())}</span>
+                            {message.text && (
+                                <p>{formatMessageWithLinks(message.text)}</p>
+                            )}
+                            <div className="message-footer">
+                                <span>{format(message.createdAt.toDate())}</span>
+                                {message.senderId === currentUser?.id && (
+                                    <span className="read-status">
+                                        {message.isSeen ? "✓✓" : "✓"}
+                                    </span>
+                                )}
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -243,6 +284,12 @@ const Chat = () => {
                         }
                         value={text}
                         onChange={(e) => setText(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault();
+                                handleSend();
+                            }
+                        }}
                         disabled={isCurrentUserBlocked || isReceiverBlocked}
                     />
                 </div>

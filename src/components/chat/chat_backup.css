@@ -50,12 +50,9 @@
             img {
                 width: 20px;
                 height: 20px;
-                cursor: pointer;
-            }
+            cursor: pointer;
         }
-    }
-
-    .center {
+    }    .center {
         padding: 20px;
         flex: 1;
         overflow: scroll;
@@ -230,6 +227,91 @@
             font-size: 16px;
             padding: 20px;
         }
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .chat {
+        .top {
+            padding: 15px;
+            
+            .user {
+                gap: 15px;
+                
+                img {
+                    width: 45px;
+                    height: 45px;
+                }
+                
+                .texts {
+                    span {
+                        font-size: 16px;
+                    }
+                    
+                    p {
+                        font-size: 13px;
+                    }
+                }
+            }
+            
+            .icon {
+                gap: 15px;
+                
+                img {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+        }
+        
+        .center {
+            padding: 15px;
+            gap: 15px;
+            
+            .message {
+                max-width: 85%;
+                
+                .text {
+                    img {
+                        height: 200px;
+                    }
+                    
+                    p {
+                        padding: 15px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        
+        .bottom {
+            padding: 15px;
+            gap: 15px;
+            
+            .icons {
+                gap: 15px;
+                
+                img {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+            
+            .input-container {
+                input {
+                    padding: 15px;
+                    font-size: 14px;
+                }
+            }
+            
+            .sendButton {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    }
+}
 
         .emojis {
             position: relative;
@@ -292,138 +374,5 @@
 
     .remove-image:hover {
         background: #ff3838;
-    }
-}
-
-/* ========== MOBILE RESPONSIVE ========== */
-
-/* Mobile phones (max-width: 767px) */
-@media (max-width: 767px) {
-    .chat {
-        border-left: none;
-        border-right: none;
-        width: 100%;
-        
-        .top {
-            padding: 15px;
-            
-            .user {
-                gap: 15px;
-                
-                img {
-                    width: 45px;
-                    height: 45px;
-                }
-                
-                .texts {
-                    span {
-                        font-size: 16px;
-                    }
-                    
-                    p {
-                        font-size: 13px;
-                    }
-                }
-            }
-            
-            .icon {
-                gap: 15px;
-                
-                img {
-                    width: 18px;
-                    height: 18px;
-                }
-            }
-        }
-        
-        .center {
-            padding: 15px;
-            gap: 15px;
-            
-            .message {
-                max-width: 85%;
-                gap: 10px;
-                
-                img {
-                    width: 28px;
-                    height: 28px;
-                }
-                
-                .text {
-                    img {
-                        height: 200px;
-                    }
-                    
-                    p {
-                        padding: 15px;
-                        font-size: 14px;
-                    }
-                    
-                    span {
-                        font-size: 12px;
-                    }
-                }
-            }
-        }
-        
-        .bottom {
-            padding: 15px;
-            gap: 10px;
-            
-            .icons {
-                gap: 15px;
-            }
-            
-            .icons img {
-                width: 18px;
-                height: 18px;
-            }
-            
-            input {
-                padding: 15px;
-                font-size: 15px;
-            }
-            
-            .sendButton {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-            
-            .emojis .picker {
-                bottom: 55px;
-                left: -200px;
-                transform: scale(0.8);
-                transform-origin: bottom left;
-            }
-        }
-        
-        .image-preview {
-            padding: 10px 15px 0;
-        }
-        
-        .preview-container {
-            max-width: 150px;
-        }
-        
-        .preview-container img {
-            max-height: 120px;
-        }
-    }
-}
-
-/* Tablet responsive (768px - 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
-    .chat {
-        .center {
-            .message {
-                max-width: 75%;
-            }
-        }
-        
-        .bottom {
-            .emojis .picker {
-                transform: scale(0.9);
-            }
-        }
     }
 }
