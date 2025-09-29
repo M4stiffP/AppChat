@@ -1,3 +1,11 @@
+:root {
+  --bg-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  --primary-color: #5183fe;
+  --secondary-color: rgba(17, 25, 40, 0.5);
+  --text-color: #ffffff;
+  --border-color: rgba(221, 221, 221, 0.2);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,13 +15,13 @@
 }
 
 body{
-  background-image: url("/bg.jpg");
+  background: var(--bg-gradient);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100vh;
-  color: white;
+  color: var(--text-color);
   margin: 0;
   padding: 0;
 }
@@ -29,10 +37,10 @@ body{
   width: 90vw;
   height: 90vh;
   max-width: 1200px;
-  background-color: rgba(17,25,40,0.75);
+  background-color: var(--secondary-color);
   backdrop-filter: blur(19px) saturate(180%);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  border: 1px solid var(--border-color);
   display: flex;
   overflow: hidden;
 } 

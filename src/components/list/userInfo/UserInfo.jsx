@@ -2,10 +2,12 @@ import "./userInfo.css"
 import { useUserStore } from "../../../lib/userStore"
 import { auth } from "../../../lib/firebase"
 import { useState, useEffect, useRef } from "react"
+import ThemeModal from "../../theme/ThemeModal"
 
 const UserInfo = () => {
     const { currentUser } = useUserStore()
     const [showDropdown, setShowDropdown] = useState(false)
+    const [showThemeModal, setShowThemeModal] = useState(false)
     const dropdownRef = useRef(null)
 
     useEffect(() => {
@@ -36,7 +38,7 @@ const UserInfo = () => {
     }
 
     const handleTheme = () => {
-        alert('Theme feature coming soon!')
+        setShowThemeModal(true)
         setShowDropdown(false)
     }
 
@@ -132,6 +134,11 @@ const UserInfo = () => {
                     style={{ cursor: 'pointer' }}
                 />
             </div>
+
+            <ThemeModal 
+                isOpen={showThemeModal} 
+                onClose={() => setShowThemeModal(false)} 
+            />
         </div>
     )
 }
