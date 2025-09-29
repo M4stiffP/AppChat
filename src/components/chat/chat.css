@@ -139,6 +139,51 @@
             cursor: pointer;
         }
 
+        .input-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .image-preview-small {
+            position: relative;
+            margin-bottom: 5px;
+        }
+
+        .image-preview-small img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid #5183fe;
+        }
+
+        .remove-image-small {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .remove-image-small:hover {
+            background: #ff3838;
+        }
+
         input {
             flex: 1;
             background-color: rgba(17, 25, 40, 0.5);
@@ -168,5 +213,48 @@
             border-radius: 5px;
             cursor: pointer;
         }
+    }
+
+    .image-preview {
+        padding: 10px 20px 0;
+        background-color: rgba(17, 25, 40, 0.3);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .preview-container {
+        position: relative;
+        display: inline-block;
+        max-width: 200px;
+    }
+
+    .preview-container img {
+        width: 100%;
+        max-height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .remove-image {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #ff4757;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+    }
+
+    .remove-image:hover {
+        background: #ff3838;
     }
 }

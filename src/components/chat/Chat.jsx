@@ -191,18 +191,6 @@ const Chat = () => {
                         </div>
                     </div>
                 ))}
-                {img.url && (
-                    <div className="message own">
-                        <div className="text">
-                            <img 
-                                src={img.url} 
-                                alt="Preview" 
-                                onClick={() => openImageModal(img.url, "Image preview")}
-                                style={{ cursor: 'pointer' }}
-                            />
-                        </div>
-                    </div>
-                )}
                 <div ref={endRef}></div>
             </div>
             <div className="bottom">
@@ -229,17 +217,35 @@ const Chat = () => {
                         style={{ cursor: 'pointer' }}
                     />
                 </div>
-                <input
-                    type="text"
-                    placeholder={
-                        isCurrentUserBlocked || isReceiverBlocked
-                            ? "You cannot send a message"
-                            : "Type something..."
-                    }
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                    disabled={isCurrentUserBlocked || isReceiverBlocked}
-                />
+                <div className="input-container">
+                    {/* Image Preview เล็กๆ บนกล่องข้อความ */}
+                    {img.url && (
+                        <div className="image-preview-small">
+                            <img 
+                                src={img.url} 
+                                alt="Preview" 
+                                onClick={() => openImageModal(img.url, "Image preview")}
+                            />
+                            <button 
+                                className="remove-image-small"
+                                onClick={() => setImg({ file: null, url: "" })}
+                            >
+                                ×
+                            </button>
+                        </div>
+                    )}
+                    <input
+                        type="text"
+                        placeholder={
+                            isCurrentUserBlocked || isReceiverBlocked
+                                ? "You cannot send a message"
+                                : img.url ? "Add a caption..." : "Type something..."
+                        }
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                        disabled={isCurrentUserBlocked || isReceiverBlocked}
+                    />
+                </div>
                 <div className="emojis">
                     <img
                         src="/emoji.png"
